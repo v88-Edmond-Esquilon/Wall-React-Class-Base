@@ -1,0 +1,138 @@
+$primary_color: #2c6bff;
+$text_color: #152c61;
+$font_semi_bold: 600;
+$font_medium: 500;
+$font_regular: 400;
+$font_light: 300;
+
+
+/** Glboal Styling*/
+a {
+    color: $primary_color;
+    text-decoration: 0;
+}
+
+button, 
+div, 
+form,
+li, 
+main, 
+textarea {
+    border-radius: 6px;
+}
+
+button {
+    background-color: $primary_color;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: $font_semi_bold;
+    opacity: 0.9;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+h1,
+h2,
+h3,
+input[type=email],
+input[type=password],
+label,
+p,
+textarea {
+    color: $text_color;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: $font_semi_bold;
+    margin: 39px 0 18px;
+}
+
+label {
+    font-weight: $font_light;
+    margin-bottom: 7px;
+}
+
+input[type=email],
+input[type=password] {
+    background: rgba(44, 107, 255, 0.08);
+    border-radius: 4px;
+    border: 0;
+    font-size: 14px;
+    height: 55px;
+    line-height: 21px;
+    padding: 17px 10px;
+    width: 370px;
+    &:focus {
+        outline: 0;
+    }
+}
+
+textarea {
+   background: #f5f8ff;
+   border: 0;
+   font-size: 16px;
+   font-weight: $font_light;
+   padding: 10px 15px 10px;
+   resize: none;
+   &:focus {
+        outline: 0;
+   }
+}
+
+.error_message {
+    color: #e1554c;
+    font-size: 14px;
+    font-weight: $font_light;
+    margin-top: 5px;
+}
+
+.error_input {
+    background-color: rgba(225, 85, 76, 0.08) !important;
+}
+
+.no_scroll {
+    overflow: hidden;
+}
+
+.hidden {
+    display: none;
+}
+
+/** End of global styling*/
+
+
+/** for sign in & sign up*/
+
+#image_container {
+    background: rgb(134 167 242);
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+    justify-content: center;
+    position: relative;
+    width: 583px;
+
+    img {
+        left: -67px;
+        position: absolute;
+        top: 45px;
+    }
+}
+
+#wrapper {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+
+    section {
+        align-items: center;
+        display: flex;
+        flex-grow: 2;
+        height: 100vh;
+        justify-content: center;
+    }
+}

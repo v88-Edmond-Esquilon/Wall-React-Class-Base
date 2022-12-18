@@ -1,0 +1,98 @@
+.modal {
+    align-items: center;
+    background-color: rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    left: 0px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 1;
+
+    #create_message_form,
+    #delete_message_form,
+    #delete_comment_form {
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+
+        .close_modal_btn {
+            align-self: flex-end;
+            background: none;
+            margin: 15px 20px 0 0;
+            width: 23px !important;
+        }
+
+        h3 {
+            font-size: 26px;
+        }
+
+        button,
+        h3 {
+            font-weight: 500;
+        }
+    }
+
+    #create_message_form {
+        flex-wrap: wrap;
+        height: fit-content;
+        width: 937px;
+
+        h3 {
+            align-self: center;
+            margin-bottom: 40px;
+        }
+
+        textarea {
+            align-self: center;
+            height: 185px;
+            margin-bottom: 31px;
+            width: 835px;
+        }
+
+        div {
+            display: flex;
+            justify-content: flex-end;
+
+            .action_btn {
+                height: 38px;
+                margin: 0 0 50px !important;
+                width: 190px;
+
+                &:nth-child(1) {
+                    width: 120px;
+                }
+                &:nth-child(2) {
+                    margin-right: 50px!important;
+                }
+            }
+        }
+    }
+
+    #delete_comment_form,
+    #delete_message_form {
+        display: inline-block;
+        height: 307px;
+        text-align: center;
+        width: 540px;
+
+        .close_modal_btn {
+            margin-left: 495px;
+        }
+
+        p {
+            font-weight: 400;
+            margin: 34px 0;
+        }
+
+        .modal_delete_btn, 
+        .action_btn  {
+            height: 46px !important;
+            margin: 0 !important;
+            width: 210px !important;
+        }   
+    }
+
+}

@@ -1,0 +1,83 @@
+.message_control {
+    border: 1px solid #dce6ff;
+    margin: 0 70px 20px;
+    padding: 24px 30px 30px;
+
+    .update_message_form,
+    .comment_form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: flex-end;
+    }
+    .comment_form {
+        border: 1px solid #dce6ff;
+        margin: 27px 0 20px;
+        padding: 30px;
+    }
+}
+
+textarea {
+    border: 1px solid #dce6ff !important;
+    height: 84px;
+    width: 100%;
+}
+
+.actions_control {
+    align-items: center;
+    display: flex;
+    gap: 30px;
+    margin-top: 24.5px;
+
+    button {
+        align-items: center;
+        background: none;
+        display: flex;
+        font-weight: 400 !important;
+        height: fit-content !important;
+        opacity: 1;
+        width: fit-content !important;
+
+        span {
+            margin-right: 3px;
+        }
+
+        img,
+        .add_comment_btn_icon {
+            margin-right: 7px;
+        }
+    }
+
+    .add_comment_inactive {
+        color: #707070;
+        .add_comment_btn_icon {
+            background: url('../../assets/images/icons/icons_group_sprite.png') no-repeat -3px -6px !important;
+            height: 18px;
+            width: 18px;
+        }
+    }
+
+    .add_comment_active {
+        color: #2c6bff;
+        .add_comment_btn_icon {
+            background: url('../../assets/images/icons/icons_group_sprite.png') no-repeat -3px -36px !important;
+            height: 18px;
+            width: 18px;
+        }
+    }
+
+    .edit_btn {
+        color: #2c6bff;
+    }
+
+    .delete_btn,
+    .profile_btn {
+        color: #00000099;
+    }
+
+    .profile_btn {
+        span {
+            font-weight: 600;
+        }
+    }
+}

@@ -1,0 +1,43 @@
+#sign_in_form {
+    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    min-height: 568px;
+    margin: 117px 204px 204px 203px;
+    padding: 31px 40px 35px;
+    width: 450px;
+
+    h2 {
+        color: #2c6bff !important;
+        font-size: 22px;
+    }
+
+    .input_control {
+        align-items: baseline;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 28px;
+
+        a {
+            color: #000;
+            font-size: 14px;
+            font-weight: 300;
+            opacity: 50%;
+        }
+    }
+
+    button {
+        align-self: center;
+        font-weight: 600;
+        height: 55px;
+        margin: 12px 0 35px;
+        width: 150px;
+    }
+
+    p {
+        color: #00000033 !important;
+        letter-spacing: 3%;
+        text-align: center;
+    }
+}
