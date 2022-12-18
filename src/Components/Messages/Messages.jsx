@@ -11,12 +11,20 @@ export default class Messages extends Component {
     validate_comment: '',
     toggle_update_btn: false,
     toggle_comment_btn: false,
+    delete_message_modal: false,
     comments: []
   }
 
   /** Displays delete message modal*/
-  onClick = () => {
-    this.props.toggleModal('delete_message_modal');
+  toggleDeleteMessage = () => {
+    if(this.state.delete_message_modal){
+      this.setState({delete_message_modal : false});
+      document.querySelector('body').classList.remove('no_scroll');
+    }
+    else{
+      this.setState({delete_message_modal : true});
+      document.querySelector('body').classList.add('no_scroll');
+    }
   }
   /** Toggle between message and update message form */
   toggleUpdateMessage = () => {
@@ -36,7 +44,7 @@ export default class Messages extends Component {
       this.setState({toggle_comment_btn: true});
     }
   }
-
+  /** Input validation*/
   onChange = (event) => {
     if(event.target.name === 'update_message_input'){
       this.setState({validate_update: event.target.value});
@@ -45,7 +53,7 @@ export default class Messages extends Component {
       this.setState({validate_comment: event.target.value});
     }
   }
-
+  /** Update Message */
   onUpdate = (event) => {
     event.preventDefault();
     let update_message = event.target.childNodes[0].value;
@@ -53,26 +61,48 @@ export default class Messages extends Component {
     this.toggleUpdateMessage();
   }
 
+  addComments = (event) => {
+    event.preventDefault();
+    let comment = event.target.childNodes[0].value;
+    const generate_id = Math.floor(Math.random() * 0xffffff).toString(16);
+    this.setState({comments: [...this.state.comments, {id: generate_id, comment: comment}]});
+    this.setState({validate_comment: ''});
+  }
+
+  deleteComment = (comment_id) => {
+    this.setState({comments: this.state.comments.filter(comment => {return comment.id !== comment_id})});
+  }
+
+  updateComment = (comment_id, update_comment) => {
+    this.setState({comments: 
+      this.state.comments.map(comment => {
+        if(comment.id === comment_id){
+          return {...comment, comment: update_comment};
+        } 
+        return comment;
+      })
+    });
+  }
 
 
   render() {
-    const {toggle_update_btn, toggle_comment_btn, validate_comment, validate_update} = this.state;
-    const {delete_message_modal, delete_comment_modal, toggleModal, message, message_id, deleteMessage} = this.props;
+    const {toggle_update_btn, toggle_comment_btn, validate_comment, validate_update, delete_message_modal, comments} = this.state;
+    const {message, message_id, deleteMessage} = this.props;
     return (
       <li className="message_control">
           <div className={!toggle_update_btn? "message" : "hidden"}>
-            <p className="message_text">{message_id}</p>
+            <p className="message_text">{message}</p>
             <div className="actions_control">
-              <button onClick={this.toggleCommentBtn} type="button" className="add_comment_inactive">
+              <button onClick={this.toggleCommentBtn} type="button" className={comments.length? "add_comment_active" : "add_comment_inactive"}>
                 <span className="add_comment_btn_icon"></span>
-                <span className="comment_counter">0</span>
+                <span className="comment_counter">{comments.length}</span>
                 Comment
               </button>
               <button onClick={this.toggleUpdateMessage} className="edit_btn" type="button">
                 <img src={PencilWrite} alt="Edit Message Icon blue" />
                 Edit
               </button>
-              <button onClick={this.onClick} className="delete_btn" type="button">
+              <button onClick={this.toggleDeleteMessage} className="delete_btn" type="button">
                 <img src={DeleteImg} alt="Trash can icon for delete message" />
                 Delete
               </button>
@@ -89,23 +119,31 @@ export default class Messages extends Component {
           </form>
           <ul className={!toggle_comment_btn? "hidden" : "comment_container"}>
             <li>
-              <form onSubmit={()=>{}} className="comment_form" action="/" method="POST">
-                <textarea onChange={this.onChange} name="comment_input" placeholder="Type your comment here."></textarea>
+              <form onSubmit={this.addComments} className="comment_form" action="/" method="POST">
+                <textarea onChange={this.onChange} name="comment_input" placeholder="Type your comment here." value={validate_comment}></textarea>
                 <button type="submit" disabled={!validate_comment}>Post Comment</button>
               </form>
             </li>
-            <Comments 
-              delete_comment_modal={delete_comment_modal}
-              toggleModal={toggleModal}
-            />
+            {
+              comments.map(index =>{
+                return (
+                  <Comments 
+                    key={index.id}
+                    comment={index.comment}
+                    comment_id={index.id}
+                    deleteComment={this.deleteComment}
+                    updateComment={this.updateComment}
+                  />
+                )
+              }).reverse()
+            }
           </ul>
-
         {
           delete_message_modal && (
             <DeleteMessage
               deleteMessage={deleteMessage}
               message_id={message_id}
-              toggleModal={toggleModal}
+              toggleDeleteMessage={this.toggleDeleteMessage}
             />
           )
         }

@@ -8,11 +8,19 @@ import './comments.scss';
 export default class Comments extends Component {
   state = {
     update_comment_btn: false,
-    validate_update: this.props.comment
+    validate_update: this.props.comment,
+    delete_comment_modal: false
   }
   /** Displays delete comment modal*/
-  onClick = () => {
-    this.props.toggleModal('delete_comment_modal');
+  toggleDeleteComment = () => {
+    if(this.state.delete_comment_modal){
+      this.setState({delete_comment_modal : false});
+      document.querySelector('body').classList.remove('no_scroll');
+    }
+    else{
+      this.setState({delete_comment_modal : true});
+      document.querySelector('body').classList.add('no_scroll');
+    }
   }
   /** Toggle between update comment or not*/
   toggleUpdateComment = () => {
@@ -20,29 +28,37 @@ export default class Comments extends Component {
       this.setState({update_comment_btn: false});
     }
     else{
-      this.setState({update_comment_btn: true, validation_update: this.props.comment});
+      this.setState({update_comment_btn: true, validate_update: this.props.comment});
     }
   }
-
+  /** Validate Input*/
   onChange = (event) => {
     this.setState({validate_update: event.target.value});
   }
+  /** On comment update */
+  onUpdate = (event) => {
+    event.preventDefault();
+    let update_comment = event.target.childNodes[0].value;
+    this.props.updateComment(this.props.comment_id, update_comment);
+    this.toggleUpdateComment();
+    this.setState({validate_update: ''});
+  }
 
   render() {
-    const {update_comment_btn, validate_update}= this.state;
-    const {delete_comment_modal, toggleModal} = this.props;
+    const {update_comment_btn, validate_update, delete_comment_modal}= this.state;
+    const {comment, comment_id, deleteComment} = this.props;
     return (
       <li className="comment_control ">
         {
           !update_comment_btn? (
             <div className="comment">
-              <p className="comment_text">The lorem ipsum is a placeholder text used in publishing and graphic design. This filler text is a short paragraph that contains all the letters of the alphabet. </p>
+              <p className="comment_text">{comment}</p>
               <div className="actions_control">
                   <button onClick={this.toggleUpdateComment} className="edit_btn" type="button">
                     <img src={PencilWrite} alt="Edit Message Icon blue" />
                     Edit
                   </button>
-                  <button onClick={this.onClick} className="delete_btn" type="button">
+                  <button onClick={this.toggleDeleteComment} className="delete_btn" type="button">
                     <img src={DeleteImg} alt="Trash can icon for delete message" />
                     Delete
                   </button>
@@ -54,8 +70,8 @@ export default class Comments extends Component {
             </div>
           ):
           (
-            <form onSubmit={()=>{}} className="update_comment_form" action="/" method="POST">
-              <textarea onChange={this.onChange} name="update_comment_input"></textarea>
+            <form onSubmit={this.onUpdate} className="update_comment_form" action="/" method="POST">
+              <textarea onChange={this.onChange} name="update_comment_input" value={validate_update}></textarea>
               <button onClick={this.toggleUpdateComment} type="button" className="cancel_btn">Cancel</button>
               <button type="submit" disabled={!validate_update}>Update Comment</button>
             </form>
@@ -64,7 +80,9 @@ export default class Comments extends Component {
         {
           delete_comment_modal && (
             <DeleteComment
-              toggleModal={toggleModal}
+              toggleDeleteComment={this.toggleDeleteComment}
+              comment_id={comment_id}
+              deleteComment={deleteComment}
             />
           )
         }

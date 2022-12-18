@@ -34,7 +34,6 @@ export default class Wall extends Component {
   }
 
   deleteMessage = (message_id) =>{
-    console.log(message_id)
     this.setState({messages: this.state.messages.filter(message => {return message.id !== message_id})});
   }
 
@@ -49,13 +48,17 @@ export default class Wall extends Component {
     });
   }
 
+  onLogout = () => {
+    this.props.authenticate();
+  }
+
   render() {
     const {create_message, delete_message_modal, delete_comment_modal, messages} = this.state;
     return (
       <div id="wall_wrapper">
         <nav>
-          <h2><Link to="/">The Wall Assignment</Link></h2>
-          <p>Welcome, Edmond Esquilon <Link to="/">Log out</Link></p>
+          <h2><Link to="/" onClick={this.onLogout}>The Wall Assignment</Link></h2>
+          <p>Welcome, Edmond Esquilon <Link to="/" onClick={this.onLogout}>Log out</Link></p>
         </nav>
         <div id="container">
           <main>

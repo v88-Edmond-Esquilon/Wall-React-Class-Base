@@ -4,11 +4,12 @@ import './modals.scss';
 
 export default class DeleteComment extends Component {
   onClose = () => {
-    this.props.toggleModal('delete_comment_modal');
+    this.props.toggleDeleteComment();
   }
 
   onSubmit = (event) => {
     event.preventDefault();
+    this.props.deleteComment(this.props.comment_id);
     this.onClose();
   }
 

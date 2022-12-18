@@ -9,6 +9,7 @@ export default class CreateMessage extends Component {
   onClick = () => {
     this.props.toggleModal('create_message');
     this.setState({message: ''});
+    
   }
   onSubmit = (event) => {
     event.preventDefault();

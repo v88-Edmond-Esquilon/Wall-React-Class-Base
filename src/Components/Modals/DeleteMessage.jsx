@@ -5,7 +5,7 @@ import './modals.scss';
 export default class DeleteMessage extends Component {
 
   onClose = () => {
-    this.props.toggleModal('delete_message_modal');
+    this.props.toggleDeleteMessage();
   }
 
   onSubmit = (event) => {

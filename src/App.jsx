@@ -5,7 +5,7 @@ import './App.scss';
 
 export default class App extends Component {
   state = {
-    logged_in: true,
+    logged_in: false,
   }
 
   authenticate = () => {
