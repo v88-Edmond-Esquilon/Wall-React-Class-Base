@@ -1,7 +1,7 @@
 /**  Modals */
-export { default as CreateMessage } from './Modals/CreateMessage';
-export { default as DeleteMessage } from './Modals/DeleteMessage';
-export { default as DeleteComment } from './Modals/DeleteComment';
+export { default as CreateMessageModal } from './Modals/CreateMessage';
+export { default as DeleteMessageModal } from './Modals/DeleteMessage';
+export { default as DeleteCommentModal } from './Modals/DeleteComment';
 
 /** Components */
 export { default as Messages } from './Messages/Messages';
