@@ -1,8 +1,31 @@
+/** React */
 import React, { Component } from 'react';
+
+/** Image Import */
 import CloseButtonImg from '../../assets/images/icons/cancel.png';
+
+/** CSS Styling */
 import './modals.scss';
 
+
+/**
+ * @class
+ * @extends Component
+ * Class component that displays the delete comment modal <br/>
+ * This component is called at Wall.jsx <br/>
+ * Last date updated: December 19, 2022
+ */
 export default class DeleteComment extends Component {
+
+	/**
+	 * DOCU: Handles the form submission of delete comment and also triggers the props. <br/>
+	 * Triggered: when the user clicks the delete button to submit the form. <br/>
+	 * Last date updated: December 19, 2022
+	 * @function
+	 * @memberOf DeleteComment.jsx
+	 * @param {object} event - get the event object to prevent submitting
+	 * @author Edmond 
+	 */
 	onSubmit = (event, message_id, comment_id) => {
 		event.preventDefault();
 		this.props.deleteComment(message_id, comment_id);

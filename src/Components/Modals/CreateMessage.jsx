@@ -1,17 +1,50 @@
+/** React */
 import React, { Component } from 'react';
+
+/** Image Import */
 import CloseButtonImg from '../../assets/images/icons/cancel.png';
+
+/** Helpers */
 import {inputChange} from '../../__helpers/helpers';
+
+/** CSS Styling */
 import './modals.scss';
 
+
+/**
+ * @class
+ * @extends Component
+ * Class component that displays the create message modal <br/>
+ * This component is called at Wall.jsx <br/>
+ * Last date updated: December 19, 2022
+ */
 export default class CreateMessage extends Component {
-  state = {
-    message: ''
-  }
+	state = {
+		message: ''
+	}
+
+	/**
+	 * DOCU: Handles the visibility of this modal and and resets the value of state message. <br/>
+	 * Triggered: when the user clicks the close button and cancel button <br/>
+	 * Last date updated: December 19, 2022
+	 * @function
+	 * @memberOf CreateMessage.jsx
+	 * @author Edmond 
+	 */
 	onClose = () => {
 		this.props.toggleModal();
 		this.setState({message: ''});
 	}
 
+	/**
+	 * DOCU: Handles the form submission of delete message and also triggers the props. <br/>
+	 * Triggered: when the user clicks the delete button to submit the form. <br/>
+	 * Last date updated: December 19, 2022
+	 * @function
+	 * @memberOf CreateMessage.jsx
+	 * @param {object} event - get the event object to prevent submitting
+	 * @author Edmond 
+	 */
 	onSubmit = (event) => {
 		event.preventDefault();
 		this.props.addMessage(this.state.message);

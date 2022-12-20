@@ -1,11 +1,28 @@
+/** React */
 import React, { Component } from 'react';
+
+/** Components */
 import {Comments} from '../../Components';
+
+/** Image imports */
 import AvatarImg from '../../assets/images/icons/avatar.png';
 import PencilWrite from '../../assets/images/icons/pencil-write.png';
 import DeleteImg from '../../assets/images/icons/delete.png';
+
+/** Helpers */
 import {inputChange, toggleUpdate} from '../../__helpers/helpers';
+
+/** CSS Styling */
 import './messages.scss';
 
+
+/**
+ * @class
+ * @extends Component 
+ * This class component is a part of the Wall message that displays the message. <br/>
+ * This component is called at the Wall.jsx as a child component. <br/>
+ * Last date update: December 19, 2022
+ */
 export default class Messages extends Component {
 	state = {
 		validate_update: this.props.message,
@@ -15,7 +32,14 @@ export default class Messages extends Component {
 		comments: []
 	}
 
-	/** Toggle between displaying comments or not*/
+	/**
+	 * DOCU: Toggle between displaying comments or not <br/>
+	 * Triggered: when the user clicks the comment button. <br/>
+	 * Last date update: December 19, 2022
+	 * @function
+	 * @memberOf Message.jsx
+	 * @author Edmond
+	 */
 	toggleCommentBtn = () => {
 		if(this.state.toggle_comment_btn){
 			this.setState({toggle_comment_btn: false});
@@ -25,15 +49,31 @@ export default class Messages extends Component {
 		}
 	}
 
-	/** Update Message */
+	/**
+	 * DOCU: handles the form submission for updating the message <br/>
+	 * Triggered: When the user submits the form for updating the message <br/>
+	 * Last date update: December 19, 2022
+	 * @function
+	 * @memberOf Messages.jsx
+	 * @param {object} event - get the event object
+	 * @author Edmond
+	 */
 	messageUpdate = (event) => {
 		event.preventDefault();
 		let update_message = event.target.childNodes[0].value;
 		this.props.updateMessage(this.props.message_id, update_message);
 		toggleUpdate(this, 'message');
-
 	}
 
+	/**
+	 * DOCU: handles the form submission for adding the comment <br/>
+	 * Triggered: When the user submits the form for adding the comment <br/>
+	 * Last date update: December 19, 2022
+	 * @function
+	 * @memberOf Messages.jsx
+	 * @param {object} event - get the event object
+	 * @author Edmond
+	 */
 	submitAddComment = (event) => {
 		event.preventDefault();
 		let comment = event.target.childNodes[0].value;
@@ -43,7 +83,7 @@ export default class Messages extends Component {
 
 
 	render() {
-		const {toggle_update_btn, toggle_comment_btn, validate_comment, validate_update, comments} = this.state;
+		const {toggle_update_btn, toggle_comment_btn, validate_comment, validate_update} = this.state;
 		const {message, messageDeleteId, message_id, updateComment, getCommentId} = this.props;
 		return (
 			<li className="message_control">

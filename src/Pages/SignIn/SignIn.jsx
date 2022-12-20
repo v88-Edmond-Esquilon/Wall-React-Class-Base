@@ -1,9 +1,25 @@
+/** React */
 import React, { Component } from 'react';
+
+/** Plugins */
 import { Link } from 'react-router-dom';
+
+/** Image Import */
 import PersonImage from '../../assets/images/userpanel.png';
+
+/** Helpers */
 import {inputChange} from '../../__helpers/helpers';
+
+/** CSS Styling */
 import './signin.scss';
 
+/**
+ * @class
+ * @extends Component
+ * Class component that displays the whole SignIn form Page. <br/>
+ * This class is called at the App.jsx <br/>
+ * Last date updated: December 19, 2022
+ */
 export default class SignIn extends Component {
 	state = {
 		email: '',
@@ -11,6 +27,15 @@ export default class SignIn extends Component {
 		errors: {}
 	}
 
+	/**
+	 * DOCU: Handles the logic for the errors of input after form submission. <br/>
+	 * Triggered: when the user submits the form. <br/>
+	 * Last date updated: December 19, 2022
+	 * @function
+	 * @memberOf SignIn.jsx
+	 * @returns is_valid value if true, false otherwise
+	 * @author Edmond
+	 */
 	formValidation = () => {
 		const {email, password} = this.state;
 		let is_valid = true;
@@ -42,6 +67,15 @@ export default class SignIn extends Component {
 		return is_valid;
 	}
 
+	/**
+	 * DOCU: Handles the form submission and authentication. <br/>
+	 * Triggered: when the user submits the form. <br/>
+	 * Last date updated: December 19, 2022
+	 * @function
+	 * @memberOf SignIn.jsx
+	 * @param {object} event - get the event object to prevent submitting
+	 * @author Edmond 
+	 */
 	onSubmit = (event) => {
 		event.preventDefault();
 		let is_valid = this.formValidation();
